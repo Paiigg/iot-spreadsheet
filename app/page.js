@@ -231,7 +231,7 @@ export default function Home() {
           </Card>
           <Card className="flex flex-col items-center justify-between mb-2 lg:flex-row">
             <CardHeader>
-              <CardTitle>Suhu Farenheit</CardTitle>
+              <CardTitle>Suhu Fahrenheit</CardTitle>
               <CardDescription>description</CardDescription>
             </CardHeader>
             <CardContent className="pb-4 text-5xl font-semibold lg:pb-0 text-primary">
@@ -265,7 +265,7 @@ export default function Home() {
           </Card>
           <Card className="flex flex-col items-center justify-between mb-2 lg:flex-row">
             <CardHeader>
-              <CardTitle>Suhu Farenheit</CardTitle>
+              <CardTitle>Suhu Fahrenheit</CardTitle>
               <CardDescription>description</CardDescription>
             </CardHeader>
             <CardContent className="pb-4 text-5xl font-semibold lg:pb-0 text-primary">
