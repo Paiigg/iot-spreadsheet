@@ -91,7 +91,7 @@ export default function Home() {
       if (err) {
         console.error("Subscription error:", err);
       } else {
-        console.log("Subscribed to plant5/suhu");
+        console.log("Subscribed succes");
       }
     });
 
@@ -135,8 +135,6 @@ export default function Home() {
       } else {
         setShow(false);
       }
-      console.log({ parsedMessage });
-      console.log({ warningMessage });
 
       //setData(newData);
 

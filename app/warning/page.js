@@ -18,7 +18,7 @@ const WarningPage = () => {
   const handleResetWarnings = () => {
     setWarningMessage([]);
   };
-  console.log({ warningMessage });
+
   return (
     <div className="w-full p-10 ">
       <div>
