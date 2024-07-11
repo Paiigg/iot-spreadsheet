@@ -84,14 +84,14 @@ export default function Home() {
 
   useEffect(() => {
     if (!client) {
-      client = mqtt.connect("ws://broker.emqx.io:8083/mqtt", options); // Ganti dengan URL WebSocket broker MQTT Anda
+      client = mqtt.connect("wss://broker.emqx.io:8084/mqtt", options); // Ganti dengan URL WebSocket broker MQTT Anda
     }
 
     client.subscribe("plant5/suhu", (err) => {
       if (err) {
         console.error("Subscription error:", err);
       } else {
-        console.log("Subscribed to test/suhu2");
+        console.log("Subscribed to plant5/suhu");
       }
     });
 
