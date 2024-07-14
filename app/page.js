@@ -124,7 +124,7 @@ export default function Home() {
     };
 
     fetchData();
-  }, []);
+  }, [latestData, allData]);
 
   // if (loading) {
   //   return <div>Loading...</div>;
