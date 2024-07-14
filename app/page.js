@@ -48,9 +48,7 @@ const options = {
 };
 
 async function getData() {
-  const res = await fetch("https://iot-dashboard-blue.vercel.app/api/sheets", {
-    cache: "no-cache",
-  });
+  const res = await fetch("https://iot-dashboard-blue.vercel.app/api/sheets");
 
   if (!res.ok) {
     throw new Error("Failed to fetch data");
