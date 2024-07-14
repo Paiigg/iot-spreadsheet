@@ -48,7 +48,9 @@ const options = {
 };
 
 async function getData() {
-  const res = await fetch("/api/sheets");
+  const res = await fetch("/api/sheets", {
+    cache: "no-store",
+  });
 
   if (!res.ok) {
     throw new Error("Failed to fetch data");
@@ -124,6 +126,9 @@ export default function Home() {
     };
 
     fetchData();
+    const intervalId = setInterval(fetchData, 5000);
+
+    return () => clearInterval(intervalId);
   }, [latestData, allData]);
 
   // if (loading) {
