@@ -54,7 +54,7 @@ export default function Home() {
   const [latestData, setLatestData] = useState([]);
   const { setWarningMessage } = useWarningContext();
   const [show, setShow] = useState(false);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const { isLoaded, userId } = useAuth();
 
   const { push } = useRouter();
@@ -73,7 +73,6 @@ export default function Home() {
     }
 
     const fetchData = async () => {
-      setLoading(true);
       const mesinRef = ref(database, "mesin");
       await get(mesinRef)
         .then((snapshot) => {
@@ -115,7 +114,6 @@ export default function Home() {
           } else {
             console.log("No data available");
           }
-          setLoading(false);
         })
         .catch((error) => {
           console.log({ error });
@@ -168,23 +166,23 @@ export default function Home() {
 
   // }, [latestData, allData]);
 
-  if (loading) {
-    return (
-      <main className="p-10">
-        <div>
-          <h1 className="text-4xl font-bold text-primary">Dashboard</h1>
-          <p className="text-sm">Monitoring suhu</p>
-        </div>
+  // if (loading) {
+  //   return (
+  //     <main className="p-10">
+  //       <div>
+  //         <h1 className="text-4xl font-bold text-primary">Dashboard</h1>
+  //         <p className="text-sm">Monitoring suhu</p>
+  //       </div>
 
-        <div className="grid grid-cols-1 gap-2 mt-4 lg:grid-cols-2">
-          <Skeleton className="lg:w-[425px] lg:h-[350px] h-[460px]" />
-          <Skeleton className="lg:w-[425px] lg:h-[350px] h-[460px]" />
-          <Skeleton className="lg:w-[425px] lg:h-[350px] h-[460px]" />
-          <Skeleton className="lg:w-[425px] lg:h-[350px] h-[460px]" />
-        </div>
-      </main>
-    );
-  }
+  //       <div className="grid grid-cols-1 gap-2 mt-4 lg:grid-cols-2">
+  //         <Skeleton className="lg:w-[425px] lg:h-[350px] h-[460px]" />
+  //         <Skeleton className="lg:w-[425px] lg:h-[350px] h-[460px]" />
+  //         <Skeleton className="lg:w-[425px] lg:h-[350px] h-[460px]" />
+  //         <Skeleton className="lg:w-[425px] lg:h-[350px] h-[460px]" />
+  //       </div>
+  //     </main>
+  //   );
+  // }
 
   // if (error) {
   //   return <div>Error: {error}</div>;
