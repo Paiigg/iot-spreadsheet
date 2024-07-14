@@ -48,7 +48,7 @@ const options = {
 };
 
 async function getData() {
-  const res = await fetch("/api/sheets", {
+  const res = await fetch("https://iot-dashboard-blue.vercel.app/api/sheets", {
     cache: "no-cache",
   });
 
