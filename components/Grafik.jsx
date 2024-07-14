@@ -41,9 +41,7 @@ const Grafik = ({ latestData, allData }) => {
         <Card key={data.id}>
           <CardHeader>
             <CardTitle>{`Grafik Mesin ${data.id}`}</CardTitle>
-            <CardDescription>
-              Updated at : {data.date} - {data.time}
-            </CardDescription>
+            <CardDescription>Updated at : {data.timestamp}</CardDescription>
           </CardHeader>
           <CardContent>
             <ChartContainer config={chartConfig}>
