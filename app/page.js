@@ -1,30 +1,7 @@
 "use client";
 
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-
-import {
-  CartesianGrid,
-  LabelList,
-  Line,
-  LineChart,
-  XAxis,
-  YAxis,
-} from "recharts";
-
-import {
-  ChartConfig,
-  ChartContainer,
-  ChartTooltip,
-  ChartTooltipContent,
-} from "@/components/ui/chart";
 import { useEffect, useState } from "react";
-import mqtt from "mqtt";
+//import mqtt from "mqtt";
 import Dialog from "@/components/Modal";
 import { useWarningContext } from "@/components/context/warning-context";
 import { v4 as uuidv4 } from "uuid";
@@ -34,40 +11,37 @@ import { get, ref } from "firebase/database";
 import { database } from "@/lib/firebase";
 import Grafik from "@/components/Grafik";
 import TempCard from "@/components/TempCard";
-import { Skeleton } from "@/components/ui/skeleton";
+// import { Skeleton } from "@/components/ui/skeleton";
 
-const clientId = "mqttjs_" + Math.random().toString(16).substr(2, 8);
+//const clientId = "mqttjs_" + Math.random().toString(16).substr(2, 8);
 
-let client;
+// let client;
 
-const options = {
-  keepalive: 30,
-  clientId,
-  protocolId: "MQTT",
-  protocolVersion: 4,
-  clean: true,
-  reconnectPeriod: 1000,
-  connectTimeout: 30000,
-};
+// const options = {
+//   keepalive: 30,
+//   clientId,
+//   protocolId: "MQTT",
+//   protocolVersion: 4,
+//   clean: true,
+//   reconnectPeriod: 1000,
+//   connectTimeout: 30000,
+// };
 
-async function getData() {
-  const res = await fetch("/api/sheets", {
-    cache: "no-store",
-  });
+// async function getData() {
+//   const res = await fetch("/api/sheets", {
+//     cache: "no-store",
+//   });
 
-  if (!res.ok) {
-    throw new Error("Failed to fetch data");
-  }
+//   if (!res.ok) {
+//     throw new Error("Failed to fetch data");
+//   }
 
-  return res.json();
-}
+//   return res.json();
+// }
 
 export default function Home() {
-  const [testData, setTestData] = useState([]);
-  const [testAllData, setTestAllData] = useState([]);
   const [allData, setAllData] = useState([]);
   const [latestData, setLatestData] = useState([]);
-  const [loading, setLoading] = useState(true);
   const { setWarningMessage } = useWarningContext();
   const [show, setShow] = useState(false);
   const { isLoaded, userId } = useAuth();
@@ -88,7 +62,6 @@ export default function Home() {
     }
 
     const fetchData = async () => {
-      setLoading(true);
       const mesinRef = ref(database, "mesin");
       await get(mesinRef)
         .then((snapshot) => {
@@ -127,7 +100,6 @@ export default function Home() {
                 setShow(true);
               }
             });
-            setLoading(false);
           } else {
             console.log("No data available");
           }
@@ -143,7 +115,7 @@ export default function Home() {
 
     // Clean up interval on component unmount or when testData changes
     return () => clearInterval(interval);
-  }, [testData]);
+  }, [latestData]);
 
   // useEffect(() => {
   //   if (!isLoaded || !userId) {
@@ -191,9 +163,9 @@ export default function Home() {
   //   return <div>Error: {error}</div>;
   // }
   // console.log({ allData });
-  console.log({ latestData });
-  console.log({ testData });
-  console.log({ testAllData });
+  // console.log({ latestData });
+  // console.log({ testData });
+  // console.log({ testAllData });
   return (
     <main className="p-10">
       <div>
@@ -201,44 +173,8 @@ export default function Home() {
         <p className="text-sm">Monitoring suhu</p>
       </div>
 
-      <div className="grid grid-cols-1 gap-2 mt-4 lg:grid-cols-2">
-        {latestData?.map((data, index) => (
-          <Card key={index} className="p-4 mb-4 text-center lg:text-left">
-            <CardHeader>
-              <CardTitle>{`Suhu Mesin ${data.id}`}</CardTitle>
-              <CardDescription>Updated at : {data.timestamp}</CardDescription>
-            </CardHeader>
-            <Card className="flex flex-col items-center justify-between mb-2 lg:flex-row">
-              <CardHeader>
-                <CardTitle>Suhu Celcius</CardTitle>
-                <CardDescription>description</CardDescription>
-              </CardHeader>
-              <CardContent className="pb-4 text-4xl font-semibold lg:pb-0 text-primary">
-                {data.celcius ? (
-                  <span>{data.celcius} °C</span>
-                ) : (
-                  <span>XX.XX °C</span>
-                )}
-              </CardContent>
-            </Card>
-            <Card className="flex flex-col items-center justify-between mb-2 lg:flex-row">
-              <CardHeader>
-                <CardTitle>Suhu Fahrenheit</CardTitle>
-                <CardDescription>description</CardDescription>
-              </CardHeader>
-              <CardContent className="pb-4 text-4xl font-semibold lg:pb-0 text-primary">
-                {data.fahrenheit ? (
-                  <span>{data.fahrenheit} °F</span>
-                ) : (
-                  <span>XX.XX °F</span>
-                )}
-              </CardContent>
-            </Card>
-          </Card>
-        ))}
-      </div>
-      <TempCard latestData={latestData} loading={loading} />
-      <Grafik latestData={latestData} allData={allData} loading={loading} />
+      <TempCard latestData={latestData} />
+      <Grafik latestData={latestData} allData={allData} />
       <Dialog show={show} setShow={setShow} handleModal={handleModal} />
     </main>
   );
