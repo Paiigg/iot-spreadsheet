@@ -22,10 +22,11 @@ import {
 import { usePathname } from "next/navigation";
 
 import Image from "next/image";
-import Logo from "@/public/logo4.png";
+import Logo from "@/public/logo.png";
+import LogoIAT from "@/public/logo_iat.svg";
 import Link from "next/link";
 
-import { FolderKanban, ShieldAlert, AlignLeft } from "lucide-react";
+import { FolderKanban, ShieldAlert, AlignLeft, Slash, X } from "lucide-react";
 import { UserButton } from "@clerk/nextjs";
 
 const Sidebar = () => {
@@ -43,15 +44,44 @@ const Sidebar = () => {
         } h-screen p-4 border-r  w-[300px] sticky top-0 left-0 `}
       >
         <Command>
-          <Link href="/">
-            <Image
-              src={Logo}
-              width={300}
-              height={300}
-              alt="Logo Indospring Tbk."
-            />
-          </Link>
-          <div className="flex justify-center">
+          {/* <Link href="/">
+            <div className="flex items-center justify-center mb-2">
+              <Image
+                src={Logo}
+                width={100}
+                height={100}
+                alt="Logo PT Indospring Tbk."
+              />
+
+              <X size={50} color="hsl(var(--primary))" className="pr-4" />
+              <Image
+                src={LogoIAT}
+                width={100}
+                height={100}
+                alt="Logo IAT PT Indospring Tbk."
+              />
+            </div>
+          </Link> */}
+
+          <div className="flex flex-col items-center justify-center">
+            <Link href="/">
+              <div className="flex items-center justify-center mb-2">
+                <Image
+                  src={Logo}
+                  width={100}
+                  height={100}
+                  alt="Logo PT Indospring Tbk."
+                />
+
+                <X size={50} color="hsl(var(--primary))" className="pr-4" />
+                <Image
+                  src={LogoIAT}
+                  width={100}
+                  height={100}
+                  alt="Logo IAT PT Indospring Tbk."
+                />
+              </div>
+            </Link>
             <ModeToggle />
           </div>
           <CommandList className="flex flex-col justify-between">
@@ -123,12 +153,26 @@ const Sidebar = () => {
                   <Command>
                     <div className="flex flex-col items-center justify-center">
                       <Link href="/">
-                        <Image
-                          src={Logo}
-                          width={300}
-                          height={300}
-                          alt="Logo Indospring Tbk."
-                        />
+                        <div className="flex items-center justify-center">
+                          <Image
+                            src={Logo}
+                            width={70}
+                            height={0}
+                            alt="Logo PT Indospring Tbk."
+                          />
+
+                          <X
+                            size={50}
+                            color="hsl(var(--primary))"
+                            className="pr-4"
+                          />
+                          <Image
+                            src={LogoIAT}
+                            width={70}
+                            height={70}
+                            alt="Logo IAT PT Indospring Tbk."
+                          />
+                        </div>
                       </Link>
                       <ModeToggle />
                     </div>
@@ -167,6 +211,7 @@ const Sidebar = () => {
               </DrawerContent>
             </Drawer>
           </div>
+
           <UserButton
             showName
             appearance={{
