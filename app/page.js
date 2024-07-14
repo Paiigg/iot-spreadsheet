@@ -48,7 +48,7 @@ const options = {
 };
 
 async function getData() {
-  const res = await fetch("https://iot-dashboard-blue.vercel.app/api/sheets");
+  const res = await fetch("/api/sheets");
 
   if (!res.ok) {
     throw new Error("Failed to fetch data");
@@ -124,10 +124,6 @@ export default function Home() {
     };
 
     fetchData();
-
-    const intervalId = setInterval(fetchData, 5000);
-
-    return () => clearInterval(intervalId);
   }, []);
 
   // if (loading) {
