@@ -2,7 +2,8 @@ import { fetchSheetData } from "@/lib/googleSheets";
 
 import { NextResponse } from "next/server";
 
-export const revalidate = 1; //revalidate api every 1 second
+export const dynamic = "force-dynamic";
+//export const revalidate = 1; //revalidate api every 1 second
 export async function GET(req) {
   try {
     const dataSheet1 = await fetchSheetData("Data_Logger", "A2:E12");

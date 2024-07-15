@@ -27,7 +27,7 @@ import TempCard from "@/components/TempCard";
 // };
 
 async function getData() {
-  const res = await fetch("https://iot-spreadsheet.vercel.app/api/sheets", {
+  const res = await fetch("/api/sheets", {
     cache: "no-store",
   });
 
