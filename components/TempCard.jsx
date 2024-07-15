@@ -15,7 +15,9 @@ const TempCard = ({ latestData, loading }) => {
         <Card key={index} className="p-4 mb-4 text-center lg:text-left">
           <CardHeader>
             <CardTitle>{`Suhu Mesin ${data.id}`}</CardTitle>
-            <CardDescription>Updated at : {data.timestamp}</CardDescription>
+            <CardDescription>
+              Updated at : {data.date} - {data.time}
+            </CardDescription>
           </CardHeader>
           <Card className="flex flex-col items-center justify-between mb-2 lg:flex-row">
             <CardHeader>
