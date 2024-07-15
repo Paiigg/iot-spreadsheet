@@ -2,6 +2,7 @@ import { fetchSheetData } from "@/lib/googleSheets";
 
 import { NextResponse } from "next/server";
 
+export const revalidate = 1; //revalidate api every 1 second
 export async function GET(req) {
   try {
     const dataSheet1 = await fetchSheetData("Data_Logger", "A2:E12");
@@ -11,13 +12,18 @@ export async function GET(req) {
     const formattedSheet2 = formatSheetData(dataSheet2);
 
     //return new Response(JSON.stringify(formattedSheet1), { status: 200 });
-    return NextResponse.json(
+    const response = NextResponse.json(
       {
         data_logger: formattedSheet1,
         latest_data_logger: formattedSheet2,
       },
       { status: 200 }
     );
+
+    // Add headers to avoid caching
+    response.headers.set("Cache-Control", "no-store, max-age=0");
+
+    return response;
     // NextResponse.json({
     //   data_logger: formattedSheet1,
     //   latest_data_logger: formattedSheet2,
