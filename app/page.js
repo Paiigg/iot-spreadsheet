@@ -7,19 +7,8 @@ import { useWarningContext } from "@/components/context/warning-context";
 import { v4 as uuidv4 } from "uuid";
 import { useAuth } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
-import { get, ref } from "firebase/database";
-import { database } from "@/lib/firebase";
 import Grafik from "@/components/Grafik";
 import TempCard from "@/components/TempCard";
-import { Skeleton } from "@/components/ui/skeleton";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
 
 // import { Skeleton } from "@/components/ui/skeleton";
 
