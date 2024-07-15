@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import {
   Card,
@@ -41,7 +43,9 @@ const Grafik = ({ latestData, allData }) => {
         <Card key={data.id}>
           <CardHeader>
             <CardTitle>{`Grafik Mesin ${data.id}`}</CardTitle>
-            <CardDescription>Updated at : {data.timestamp}</CardDescription>
+            <CardDescription>
+              Updated at : {data.date} - {data.time}
+            </CardDescription>
           </CardHeader>
           <CardContent>
             <ChartContainer config={chartConfig}>

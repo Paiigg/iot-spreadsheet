@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-//import mqtt from "mqtt";
 import Dialog from "@/components/Modal";
 import { useWarningContext } from "@/components/context/warning-context";
 import { v4 as uuidv4 } from "uuid";
@@ -10,24 +9,8 @@ import { useRouter } from "next/navigation";
 import Grafik from "@/components/Grafik";
 import TempCard from "@/components/TempCard";
 
-// import { Skeleton } from "@/components/ui/skeleton";
-
-//const clientId = "mqttjs_" + Math.random().toString(16).substr(2, 8);
-
-// let client;
-
-// const options = {
-//   keepalive: 30,
-//   clientId,
-//   protocolId: "MQTT",
-//   protocolVersion: 4,
-//   clean: true,
-//   reconnectPeriod: 1000,
-//   connectTimeout: 30000,
-// };
-
 async function getData() {
-  const res = await fetch("/api/sheets", {
+  const res = await fetch("http://localhost:3000/api/sheets", {
     cache: "no-store",
   });
 
@@ -46,75 +29,10 @@ export default function Home() {
   const { isLoaded, userId } = useAuth();
 
   const { push } = useRouter();
-  // In case the user signs out while on the page.
-  // if (!isLoaded || !userId) {
-  //   push("/sign-in");
-  // }
 
   const handleModal = () => {
     setShow(!show);
   };
-
-  // useEffect(() => {
-  //   if (!isLoaded || !userId) {
-  //     push("/sign-in");
-  //   }
-
-  // const fetchData = async () => {
-  //   const mesinRef = ref(database, "mesin");
-  //   await get(mesinRef)
-  //     .then((snapshot) => {
-  //       if (snapshot.exists()) {
-  //         const mesinArray = Object.entries(snapshot.val()).map(
-  //           ([id, data]) => ({
-  //             id,
-  //             ...data,
-  //             timestamp: new Date().toLocaleString("id-ID", {
-  //               timeZone: "Asia/Jakarta",
-  //             }),
-  //           })
-  //         );
-  //         setLatestData(mesinArray);
-  //         setAllData((prevWarnings) => {
-  //           // Gabungkan data baru dengan data sebelumnya
-  //           const updatedMessages = [...prevWarnings, ...mesinArray];
-
-  //           // Ambil hanya 8 data terbaru
-  //           const slicedMessages = updatedMessages.slice(-8);
-
-  //           return slicedMessages;
-  //         });
-  //         mesinArray.forEach((data) => {
-  //           //         console.log(data);
-  //           if (data.celcius >= 34) {
-  //             const warning = {
-  //               id: uuidv4(),
-  //               timestamp: new Date().toLocaleString("id-ID", {
-  //                 timeZone: "Asia/Jakarta",
-  //               }),
-  //               pesan: `Mesin ${data.id} terlalu panas! Suhu mencapai ${data.celcius} °C yang melebihi ambang batas!`,
-  //             };
-
-  //             setWarningMessage((prevWarnings) => [...prevWarnings, warning]);
-  //             setShow(true);
-  //           }
-  //         });
-  //       } else {
-  //         console.log("No data available");
-  //       }
-  //     })
-  //     .catch((error) => {
-  //       console.log({ error });
-  //     });
-  // };
-
-  //   const interval = setInterval(() => {
-  //     fetchData();
-  //   }, 5000); // 5000 milliseconds = 5 seconds
-
-  //   // Clean up interval on component unmount or when testData changes
-  //   return () => clearInterval(interval);
-  // }, [latestData]);
 
   useEffect(() => {
     if (!isLoaded || !userId) {
@@ -132,7 +50,7 @@ export default function Home() {
 
         result.latest_data_logger.forEach((data) => {
           console.log(data);
-          if (data.celcius >= 33) {
+          if (data.celcius > 34) {
             const warning = {
               id: uuidv4(),
               timestamp: new Date().toLocaleString("id-ID", {
@@ -158,27 +76,6 @@ export default function Home() {
     return () => clearInterval(interval);
   }, [latestData, allData]);
 
-  // if (loading) {
-  //   return (
-  //     <main className="p-10">
-  //       <div>
-  //         <h1 className="text-4xl font-bold text-primary">Dashboard</h1>
-  //         <p className="text-sm">Monitoring suhu</p>
-  //       </div>
-
-  //       <div className="grid grid-cols-1 gap-2 mt-4 lg:grid-cols-2">
-  //         <Skeleton className="lg:w-[425px] lg:h-[350px] h-[460px]" />
-  //         <Skeleton className="lg:w-[425px] lg:h-[350px] h-[460px]" />
-  //         <Skeleton className="lg:w-[425px] lg:h-[350px] h-[460px]" />
-  //         <Skeleton className="lg:w-[425px] lg:h-[350px] h-[460px]" />
-  //       </div>
-  //     </main>
-  //   );
-  // }
-
-  // if (error) {
-  //   return <div>Error: {error}</div>;
-  // }
   console.log({ allData });
   console.log({ latestData });
   // console.log({ testData });

@@ -1,3 +1,5 @@
+"use client";
+
 import { React, useState } from "react";
 import {
   Dialog,
@@ -20,6 +22,9 @@ const Modal = ({ show, setShow, handleModal }) => {
           </DialogTitle>
           <DialogDescription className="flex flex-col items-center gap-2">
             <span className="text-xl font-semibold">Warning Too Hot!!</span>
+            <span className="text-xl font-semibold">
+              Cek Warning Log untuk lebih detail
+            </span>
             <Button variant="destructive" onClick={handleModal}>
               Tutup
             </Button>
